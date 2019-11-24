@@ -1,0 +1,52 @@
+ include<Servo.h>
+ 
+ Servo baseServo;
+ Servo clawServo;
+ Servo vertServo;
+ Servo lungeServo;
+
+//Potentiometer pins
+ int basePin = 0;
+ int clawPin = 1;
+ int vertPin = 2;
+ int lungePin = 3;
+ 
+ //PWM values correlating to the position of each potentiometer
+ int val_1;
+ int val_2;
+ int val_3;
+ int val_4;
+ 
+ void setup()
+ {
+   baseServo.attach(5);
+   clawServo.attach(3);
+   vertServo.attach(10);
+   lungeServo.attach(9);  
+ }
+ 
+ void loop()
+ {
+   //Make val = pwm value from potentiometer
+   val_1 = analogRead(basePin);
+   val_2 = analogRead(clawPin);
+   val_3 = analogRead(vertPin);
+   val_4 = analogRead(lungePin);
+ 
+   //map range of servo
+   val_1 = map(val_1, 0, 1023, 0, 180);
+   val_2 = map(val_2, 0, 1023, 0, 180);
+   val_3 = map(val_3, 0, 1023, 0, 180);
+   val_4 = map(val_4, 0, 1023, 0, 180);
+   
+   //write value to servo
+   baseServo.write(val_1);
+   clawServo.write(val_2);
+   vertServo.write(val_3);
+   lungeServo.write(val_4);
+   
+   delay(15);
+ }
+   
+   
+ 
